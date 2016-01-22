@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rimshot", "Rimshot\Rimshot.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{40B1AE29-17DF-4935-BD2B-5FEB42CC6314}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Songkick", "Songkick\Songkick.csproj", "{CF544F82-F695-4E4D-A72E-4827527C2737}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Songkick", "Libraries\Songkick\Songkick.csproj", "{CF544F82-F695-4E4D-A72E-4827527C2737}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
