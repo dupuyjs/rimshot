@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Songkick.Helper;
-using Songkick.Model;
+using Songkick.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

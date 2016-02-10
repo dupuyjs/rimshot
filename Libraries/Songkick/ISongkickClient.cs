@@ -1,4 +1,4 @@
-﻿using Songkick.Model;
+﻿using Songkick.Models;
 using System;
 using System.Threading.Tasks;
 

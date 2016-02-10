@@ -1,0 +1,38 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Theme Colors -->   
+    <Color x:Key="ThemePurpleHighColor">#FF81007F</Color>
+    <Color x:Key="ThemePurpleLowColor">#FFB001AD</Color>
+    <Color x:Key="ThemeBlueColor">#FF478295</Color>
+    <Color x:Key="ThemeGrayHighColor">#FF5E5E5E</Color>
+    <Color x:Key="ThemeGrayLowColor">#FFE2DFE2</Color>
+
+    <SolidColorBrush x:Key="ThemePurpleHighColorBrush" Color="{ThemeResource ThemePurpleHighColor}"/>
+    <SolidColorBrush x:Key="ThemePurpleLowColorBrush" Color="{ThemeResource ThemePurpleLowColor}"/>
+    <SolidColorBrush x:Key="ThemeBlueColorBrush" Color="{ThemeResource ThemeBlueColor}"/>
+    <SolidColorBrush x:Key="ThemeGrayHighColorBrush" Color="{ThemeResource ThemeGrayHighColor}"/>
+    <SolidColorBrush x:Key="ThemeGrayLowColorBrush" Color="{ThemeResource ThemeGrayLowColor}"/>
+
+    <Style TargetType="TextBlock" x:Key="RimshotListViewHeaderStyle">
+        <Setter Property="FontFamily" Value="ms-appx:/Assets/Fonts/SinkinSans-400Regular.otf#Sinkin Sans 400 Regular"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Foreground" Value="Black"/>
+    </Style>
+    
+    <Style TargetType="TextBlock" x:Key="ThemeListViewTitleStyle">
+        <Setter Property="FontFamily" Value="ms-appx:/Assets/Fonts/SinkinSans-600SemiBold.otf#Sinkin Sans 600 SemiBold"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="{ThemeResource ThemeBlueColor}"/>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="ThemeListViewSubTitleStyle">
+        <Setter Property="FontFamily" Value="ms-appx:/Assets/Fonts/SinkinSans-400Regular.otf#Sinkin Sans 400 Regular"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="{ThemeResource ThemeGrayHighColor}"/>
+    </Style>
+</ResourceDictionary>

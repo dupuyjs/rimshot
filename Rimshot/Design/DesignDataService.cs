@@ -1,4 +1,6 @@
-﻿using Rimshot.Model;
+﻿using Rimshot.Models;
+using Songkick;
+using Songkick.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,17 @@ namespace Rimshot.Design
 {
     public class DesignDataService : IDataService
     {
-        public Task<string> GetData()
+        private ISongkickClient _songkickClient = null;
+
+        public DesignDataService()
         {
-            return Task.FromResult("design");
+            this._songkickClient = SongkickClientFactory.CreateSongkickClient("OK5IjbPZxS0bfZOF");
+        }
+
+        public async Task<ContentResponse> GetEvents()
+        {
+            ContentResponse response = await _songkickClient.UpcomingEventSearch(null, LocationType.GeoLocation(48.7592f, 2.3025f), null, null, 1, 50);
+            return response;
         }
     }
 }
