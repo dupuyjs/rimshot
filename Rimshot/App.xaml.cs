@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rimshot.Views;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -64,7 +65,7 @@ namespace Rimshot
                 }
 
                 // Placez le frame dans la fenêtre active
-                Window.Current.Content = rootFrame;
+                Window.Current.Content = new ShellPage(rootFrame);
             }
 
             if (rootFrame.Content == null)

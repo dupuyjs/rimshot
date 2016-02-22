@@ -1,18 +1,18 @@
-﻿using Rimshot.Services;
+﻿using Rimshot.Models;
 using Songkick;
 using Songkick.Models;
 using System.Threading.Tasks;
 using System.Linq;
+using System;
 using System.Collections.Generic;
-using Rimshot.Models;
 
-namespace Rimshot.Design
+namespace Rimshot.Services
 {
-    public class DesignDataService : IDataService
+    class DataService : IDataService
     {
         private ISongkickClient _songkickClient = null;
 
-        public DesignDataService()
+        public DataService()
         {
             this._songkickClient = SongkickClientFactory.CreateSongkickClient(Keys.Songkick);
         }
@@ -29,7 +29,7 @@ namespace Rimshot.Design
 
         public async Task<ContentResponse> GetEvents()
         {
-            ContentResponse response = await _songkickClient.UpcomingEventSearch(null, LocationType.GeoLocation(48.7592f, 2.3025f), null, null, 1, 50);
+            ContentResponse response = await _songkickClient.UpcomingEventSearch(null, LocationType.GeoLocation(49.7592f, 2.3025f), null, null, 1, 50);
             return response;
         }
 

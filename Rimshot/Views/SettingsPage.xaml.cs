@@ -1,10 +1,4 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using GalaSoft.MvvmLight.Threading;
-using Microsoft.Practices.ServiceLocation;
-using Rimshot.Services;
-using Rimshot.ViewModels;
-using Songkick.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,27 +20,11 @@ namespace Rimshot.Views
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class EventsPage : Page
+    public sealed partial class SettingsPage : Page
     {
-        public EventsPage()
+        public SettingsPage()
         {
-            DispatcherHelper.Initialize();
             this.InitializeComponent();
-        }
-
-
-        public MainViewModel Default
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
-            }
-        }
-
-        private async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            EventExt concert = MasterListEvents.SelectedItem as EventExt;
-            await Default.LoadDetails(concert);
         }
     }
 }

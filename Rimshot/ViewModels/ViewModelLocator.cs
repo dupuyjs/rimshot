@@ -2,7 +2,7 @@
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
-using Rimshot.Models;
+using Rimshot.Services;
 
 namespace Rimshot.ViewModels
 {

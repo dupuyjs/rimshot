@@ -1,4 +1,4 @@
-﻿using Songkick.Helper;
+﻿using Helpers;
 using Songkick.Models;
 using System;
 using System.Collections.Generic;

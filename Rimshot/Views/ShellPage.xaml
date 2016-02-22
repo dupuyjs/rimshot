@@ -1,0 +1,78 @@
+﻿<Page
+    x:Class="Rimshot.Views.ShellPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Rimshot.Views"
+    xmlns:models="using:Rimshot.Models"
+    xmlns:views="using:Rimshot.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/BurgerMenu.xaml"/>
+                <ResourceDictionary Source="../Styles/Theme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <SplitView x:Name="ShellSplitView">
+            <SplitView.Pane>
+                <Grid x:Name="HamburgerMenu">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <RadioButton x:Name="BurgerButton" Command="{x:Bind BurgerCommand}" Checked="{x:Bind DontCheckMe}" HorizontalAlignment="Stretch">
+                        <RadioButton.Tag>
+                            <FontIcon FontSize="20" Glyph="&#xE700;" />
+                        </RadioButton.Tag>
+                    </RadioButton>
+                    
+                    <StackPanel x:Name="PrimaryButtons" Grid.Row="1">
+                        <RadioButton Command="{x:Bind NavCommand}" x:Uid="Home" Content="Home" GroupName="Nav" HorizontalAlignment="Stretch">
+                            <RadioButton.CommandParameter>
+                                <models:NavType Type="views:HomePage" />
+                            </RadioButton.CommandParameter>
+                            <RadioButton.Tag>
+                                <SymbolIcon Width="48" Height="48" Symbol="Home" />
+                            </RadioButton.Tag>
+                        </RadioButton>
+                        <RadioButton Command="{x:Bind NavCommand}" x:Uid="Events" Content="Events" GroupName="Nav" HorizontalAlignment="Stretch">
+                            <RadioButton.CommandParameter>
+                                <models:NavType Type="views:EventsPage" />
+                            </RadioButton.CommandParameter>
+                            <RadioButton.Tag>
+                                <SymbolIcon Width="48" Height="48" Symbol="Audio" />
+                            </RadioButton.Tag>
+                        </RadioButton>
+                        <RadioButton Command="{x:Bind NavCommand}" x:Uid="Artists" Content="Artists" GroupName="Nav" HorizontalAlignment="Stretch">
+                            <RadioButton.CommandParameter>
+                                <models:NavType Type="views:ArtistsPage" />
+                            </RadioButton.CommandParameter>
+                            <RadioButton.Tag>
+                                <SymbolIcon Width="48" Height="48" Symbol="People" />
+                            </RadioButton.Tag>
+                        </RadioButton>
+                    </StackPanel>
+                    
+                    <StackPanel x:Name="SecondaryButtons" Grid.Row="2">
+                        <RadioButton Command="{x:Bind NavCommand}" x:Uid="Settings" Content="Settings" GroupName="Nav" HorizontalAlignment="Stretch">
+                            <RadioButton.CommandParameter>
+                                <models:NavType Type="views:SettingsPage" />
+                            </RadioButton.CommandParameter>
+                            <RadioButton.Tag>
+                                <SymbolIcon Width="48" Height="48" Symbol="Setting" />
+                            </RadioButton.Tag>
+                        </RadioButton>
+                    </StackPanel>
+                </Grid>
+            </SplitView.Pane>
+        </SplitView>
+    </Grid>
+</Page>

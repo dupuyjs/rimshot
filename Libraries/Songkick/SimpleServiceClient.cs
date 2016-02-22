@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using Songkick.Helper;
+﻿using Helpers;
+using Newtonsoft.Json;
 using Songkick.Models;
 using System;
 using System.Collections.Generic;

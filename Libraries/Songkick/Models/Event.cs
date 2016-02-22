@@ -1,5 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+using Helpers.Extensions;
+using System.ComponentModel;
 
 namespace Songkick.Models
 {
@@ -18,7 +22,21 @@ namespace Songkick.Models
         public List<Performance> Performances { get; set; }
 
         [JsonProperty("venue")]
-        public Venue Venue { get; set; }
+        private VenueExt venue;
+        public VenueExt Venue
+        {
+            get
+            {
+                return venue;
+            }
+            set
+            {
+                this.venue = value;
+                OnPropertyChanged("Venue");
+                OnPropertyChanged("Title");
+                OnPropertyChanged("SubTitle");
+            }
+        }
 
         [JsonProperty("location")]
         public EventLocation Location { get; set; }

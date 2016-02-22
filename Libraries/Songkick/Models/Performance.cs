@@ -5,7 +5,7 @@ namespace Songkick.Models
     public class Performance : Content
     {
         [JsonProperty("artist")]
-        public Artist Artist { get; set; }
+        public ArtistExt Artist { get; set; }
 
         [JsonProperty("billingIndex")]
         public int? BillingIndex { get; set; }

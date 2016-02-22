@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Songkick.Serialization;
 using System.Collections.Generic;
 
 namespace Songkick.Models
@@ -6,7 +7,7 @@ namespace Songkick.Models
     public class Results
     {
         [JsonProperty("event")]
-        public List<Event> Events { get; set; }
+        public List<EventExt> Events { get; set; }
 
         [JsonProperty("location")]
         public List<Location> Locations { get; set; }
@@ -15,7 +16,8 @@ namespace Songkick.Models
         public List<Artist> Artists { get; set; }
 
         [JsonProperty("venue")]
-        public List<Venue> Venues { get; set; }
+        [JsonConverter(typeof(SingleOrArrayConverter<VenueExt>))]
+        public List<VenueExt> Venues { get; set; }
     }
 }
 
