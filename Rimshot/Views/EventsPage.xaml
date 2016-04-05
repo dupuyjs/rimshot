@@ -25,9 +25,9 @@
             <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
             <converters:StringLowerCaseConverter x:Key="StringLowerCaseConverter"/>
 
-            <CollectionViewSource x:Key="CollectionGroupedByDate" 
+            <!--<CollectionViewSource x:Key="CollectionGroupedByDate" 
                                   Source="{Binding Concerts}"
-                                  IsSourceGrouped="True"/>
+                                  IsSourceGrouped="True"/>-->
 
             <!-- ListView template (master) -->
             <DataTemplate x:Name="EventListViewTemplate" x:DataType="songkick:EventExt">
@@ -36,22 +36,26 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Ellipse x:Name="Thumbnail" Width="48" Height="48" Stroke="{ThemeResource ThemeGrayHighColorBrush}" Margin="0" Grid.Column="0">
-                        <!--<Ellipse.Fill>
-                            <ImageBrush ImageSource="{x:Bind ImageUrl, Mode=OneWay}" Stretch="UniformToFill"/>
-                        </Ellipse.Fill>-->
+                    <Ellipse x:Name="Thumbnail" Width="48" Height="48" Stroke="{ThemeResource ThemeGrayHighColorBrush}" StrokeThickness="0" Margin="0" Grid.Column="0">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{x:Bind Performances[0].Artist.EventImageUrl, Mode=OneWay}" Stretch="UniformToFill" ImageFailed="OnImageFailed"/>
+                        </Ellipse.Fill>
                     </Ellipse>
-                    <StackPanel Margin="12,0" Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock x:Name="DisplayName" Text="{x:Bind FullDisplayName}" Style="{ThemeResource ThemeListViewTitleStyle}"/>
-                        <TextBlock x:Name="Venue" Text="{x:Bind FullDisplayVenue}" Style="{ThemeResource ThemeListViewSubTitleStyle}"/>
-                    </StackPanel>
+
+                    <Border Margin="12,0" Grid.Column="1" VerticalAlignment="Center" BorderThickness="0" BorderBrush="{ThemeResource ThemeGrayHighColorBrush}">
+                        <StackPanel>
+                            <TextBlock x:Name="DisplayName" Text="{x:Bind FullDisplayName}" Style="{ThemeResource ThemeListViewTitleStyle}"/>
+                            <TextBlock x:Name="DisplayVenue" Text="{x:Bind FullDisplayVenue}" Style="{ThemeResource ThemeListViewSubTitleStyle}"/>
+                        </StackPanel>
+                    </Border>
                 </Grid>
             </DataTemplate>
 
             <!-- Map template (details) -->
-            <DataTemplate x:Name="MapVenueContentTemplate">
+            <DataTemplate x:Name="MapVenueContentTemplate" x:DataType="songkick:EventExt">
                 <Border BorderThickness="0" HorizontalAlignment="Stretch">
-                    <maps:MapControl MapServiceToken="BXkyIyJnXBIbzIb2EEwW~mNoI7d9yWic20hAIafm8Ng~An-qXMCnwqCoJ4ma7IL4I9JWPK8pl6qphF2SeYlI4NKKah7IjeTQ59B75G1D05Hb"/>
+                    <!--maps:MapControl MapServiceToken="BXkyIyJnXBIbzIb2EEwW~mNoI7d9yWic20hAIafm8Ng~An-qXMCnwqCoJ4ma7IL4I9JWPK8pl6qphF2SeYlI4NKKah7IjeTQ59B75G1D05Hb"/-->
+                    <Image Source="{x:Bind Performances[0].Artist.HeaderImageUrl}" Stretch="UniformToFill"/>
                 </Border>
             </DataTemplate>
 
@@ -73,11 +77,11 @@
             <DataTemplate x:Name="PerformanceItemTemplate" x:DataType="songkick:Performance">
                 <RelativePanel x:Name="xRelativePanel">
                     <Border Name="xThumnail" BorderThickness="1" BorderBrush="{ThemeResource ThemeBlueColorBrush}" Height="108" Width="108" Margin="0,0,6,12">
-                        <!--Image Source="{x:Bind Artist.ImageUrl, Mode=OneWay}" Stretch="UniformToFill" />-->
+                        <Image Source="{x:Bind Artist.ArtistImageUrl, Mode=OneWay}" Stretch="UniformToFill"/>
                     </Border>
 
                     <Border Name="xDisplayName" RelativePanel.RightOf="xThumnail" RelativePanel.AlignRightWithPanel="True" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource ThemeBlueColorBrush}">
-                        <TextBlock  Text="{x:Bind Artist.DisplayName, Mode=OneWay}" Style="{ThemeResource ThemeListViewTitleStyle}" Foreground="{ThemeResource ThemeBlueColorBrush}" Margin="0,0,0,2"/>
+                        <TextBlock  Text="{x:Bind Artist.DisplayName, Mode=OneWay}" Style="{ThemeResource ThemeListViewTitleStyle}" Foreground="{ThemeResource ThemeBlueColorBrush}" Margin="0,0,0,2" Tapped="TextBlock_Tapped"/>
                     </Border>
 
                     <Border Name="xBiography" RelativePanel.Below="xDisplayName" RelativePanel.AlignLeftWith="xDisplayName" RelativePanel.AlignRightWithPanel="True" BorderThickness="0,0,0,0" BorderBrush="{ThemeResource ThemeBlueColorBrush}" Margin="0">
@@ -136,7 +140,7 @@
                   Background="{ThemeResource ThemeGrayLowColorBrush}"
                   ItemTemplate="{StaticResource EventListViewTemplate}"
                   SelectionChanged="OnSelectionChanged"
-                  ItemsSource="{Binding Source={StaticResource CollectionGroupedByDate}}">
+                  ItemsSource="{Binding Concerts}">
             <ListView.ItemContainerTransitions>
                 <TransitionCollection>
                     <EntranceThemeTransition/>
@@ -147,7 +151,7 @@
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 </Style>
             </ListView.ItemContainerStyle>
-            <ListView.GroupStyle>
+            <!--<ListView.GroupStyle>
                 <GroupStyle HidesIfEmpty="True">
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
@@ -157,7 +161,7 @@
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>
-            </ListView.GroupStyle>
+            </ListView.GroupStyle>-->
         </ListView>
 
         <Grid x:Name="HeaderDetailLayout" 
@@ -179,7 +183,7 @@
               Background="White">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="144"/>
+                <RowDefinition Height="200"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -191,7 +195,6 @@
                 ContentTemplate="{StaticResource MapVenueContentTemplate}"
                 d:DataContext="{Binding Concerts[1]}"
                 DataContext="{x:Bind MasterListEvents.SelectedItem, Mode=OneWay}"
-                Width="2048"
                 Content="{Binding}"/>
 
             <ContentPresenter x:Name="EventDetailsContent"
@@ -210,7 +213,7 @@
                 </ContentPresenter.ContentTransitions>
             </ContentPresenter>
 
-            <ListView
+            <ListView x:Name="ListPerformances"
                 Grid.Row="2"
                 Margin="0,6"
                 d:DataContext="{Binding Concerts[1]}"

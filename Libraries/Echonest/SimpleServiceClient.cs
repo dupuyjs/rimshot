@@ -1,19 +1,19 @@
 ﻿using Echonest.Models;
 using Newtonsoft.Json;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using Windows.Web.Http;
-using Windows.Web.Http.Filters;
+using System.Net.Http;
 using Helpers;
 
 namespace Echonest
 {
     public class SimpleServiceClient : IDisposable
     {
-        private HttpBaseProtocolFilter filter;
+        //private HttpBaseProtocolFilter filter;
         private HttpClient httpClient;
         CancellationTokenSource cts;
 
@@ -21,8 +21,8 @@ namespace Echonest
 
         public SimpleServiceClient()
         {
-            filter = new HttpBaseProtocolFilter();
-            httpClient = new HttpClient(filter);
+            //filter = new HttpBaseProtocolFilter();
+            httpClient = new HttpClient();
             cts = new CancellationTokenSource();
         }
 
@@ -45,9 +45,9 @@ namespace Echonest
 
             var response = await InvokeWebOperationWithRetry<HttpResponseMessage>( async () =>
                 {
-                    var httpResponse = await httpClient.GetAsync(uri).AsTask(cts.Token);
+                    var httpResponse = await httpClient.GetAsync(uri);
 
-                    xRateLimitRemaining = int.Parse(httpResponse.Headers["X-RateLimit-Remaining"]);
+                    xRateLimitRemaining = int.Parse(httpResponse.Headers.GetValues("X-RateLimit-Remaining").First());
                     Debug.WriteLine(string.Format("X-RateLimit-Remaining: {0}", xRateLimitRemaining.ToString()));
 
                     httpResponse.EnsureSuccessStatusCode();
@@ -115,11 +115,11 @@ namespace Echonest
 
         public void Dispose()
         {
-            if (filter != null)
-            {
-                filter.Dispose();
-                filter = null;
-            }
+            //if (filter != null)
+            //{
+            //    filter.Dispose();
+            //    filter = null;
+            //}
 
             if (httpClient != null)
             {

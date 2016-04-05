@@ -35,7 +35,7 @@ namespace Echonest
             parameters.Add("apikey", _apikey);
             parameters.Add("artistid", artistId);
 
-            var template = new UriTemplate("artist/profile?api_key={apikey}&id=songkick:artist:{artistid}&bucket=id:spotify&format=json");
+            var template = new UriTemplate("artist/profile?api_key={apikey}&id=songkick:artist:{artistid}&bucket=id:spotify&bucket=id:xboxmusic-ZZ&format=json");
 
             return await GetWithRetryAsync(baseUri, template, parameters);
         }

@@ -57,12 +57,17 @@ namespace Songkick.Models
             {
                 StringBuilder sb = new StringBuilder();
 
+                if (base.Start != null)
+                {
+                    sb.AppendFormat("{0}, ", base.Start.Date.ConvertDate().ToString("m"));
+                }
+
                 if (!base.Venue.DisplayName.Equals("Unknown venue"))
                 {
                     sb.AppendFormat("{0}, ", base.Venue.DisplayName);
                 }
 
-                sb.Append(base.Location.City);
+                sb.Append(base.Location.City.Split(',').First());
 
                 return sb.ToString();
             }
@@ -99,7 +104,7 @@ namespace Songkick.Models
                     sb.AppendFormat("{0} - ", this.Venue.DisplayName);
                 }
 
-                sb.AppendFormat("Le {0}", this.Start.Date.ConvertDate());
+                sb.AppendFormat("{0}", this.Start.Date.ConvertDate().ToString("D"));
 
                 if (this.Start.DateTime.HasValue)
                 {

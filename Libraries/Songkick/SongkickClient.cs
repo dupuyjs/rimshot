@@ -56,6 +56,26 @@ namespace Songkick
             return await GetWithRetryAsync(baseUri, template, parameters);
         }
 
+        public async Task<ContentResponse> UpcomingEventSearch(int metroAreaId, int? page = 1, int? perPage = 20)
+        {
+            var parameters = new Dictionary<string, string>();
+            parameters.Add("apikey", _apikey);
+            parameters.Add("metroareaid", metroAreaId.ToString());
+
+            if (page.HasValue)
+            {
+                parameters.Add("page", page.Value.ToString());
+            }
+            if (perPage.HasValue)
+            {
+                parameters.Add("perpage", perPage.Value.ToString());
+            }
+
+            var template = new UriTemplate("metro_areas/{metroareaid}/calendar.json?apikey={apikey}&page={page}&per_page={perpage}");
+
+            return await GetWithRetryAsync(baseUri, template, parameters);
+        }
+
         public async Task<ContentResponse> UpcomingEventSearch(string artistName, LocationType location = null, DateTime? minDate = null, DateTime? maxDate = null, int? page = 1, int? perPage = 20)
         {
             var parameters = new Dictionary<string, string>();
@@ -157,6 +177,36 @@ namespace Songkick
             }
 
             var template = new UriTemplate("artists/{artistid}/calendar.json?apikey={apikey}&page={page}&per_page={perpage}&order={order}");
+
+            return await GetWithRetryAsync(baseUri, template, parameters);
+        }
+
+        public async Task<ContentResponse> ArtistPastEvents(ArtistType artist, int? page = 1, int? perPage = 20, OrderTypeEnum order = OrderTypeEnum.Ascending)
+        {
+            var parameters = new Dictionary<string, string>();
+            parameters.Add("apikey", _apikey);
+            parameters.Add("artistid", artist.ToString());
+
+            if (page.HasValue)
+            {
+                parameters.Add("page", page.Value.ToString());
+            }
+            if (perPage.HasValue)
+            {
+                parameters.Add("perpage", perPage.Value.ToString());
+            }
+
+            switch (order)
+            {
+                case OrderTypeEnum.Ascending:
+                    parameters.Add("order", "asc");
+                    break;
+                case OrderTypeEnum.Descending:
+                    parameters.Add("order", "desc");
+                    break;
+            }
+
+            var template = new UriTemplate("artists/{artistid}/gigography.json?apikey={apikey}&page={page}&per_page={perpage}&order={order}");
 
             return await GetWithRetryAsync(baseUri, template, parameters);
         }

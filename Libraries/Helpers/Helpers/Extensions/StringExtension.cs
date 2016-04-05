@@ -28,19 +28,26 @@ namespace Helpers.Extensions
             return result.ToString();
         }
 
-        public static string ConvertDate(this String str)
+        public static DateTime ConvertDate(this String str)
         {
+            DateTime parsedDate = default(DateTime);
+
             if (!string.IsNullOrEmpty(str))
             {
-                DateTime parsedDate = default(DateTime);
                 string pattern = "yyyy-MM-dd";
                 if (DateTime.TryParseExact(str, pattern, null, DateTimeStyles.None, out parsedDate))
                 {
-                    return parsedDate.ToString("dddd dd MMMM yyyy").ToTitleCase();
+                    return parsedDate;
                 }
             }
 
-            return str;
+            return parsedDate;
         }
+
+        public static string WithSize(this String str, int width, int height)
+        {
+            return string.Format("{0}&w={1}&h={2}", str, width, height);
+        }
+        
     }
 }

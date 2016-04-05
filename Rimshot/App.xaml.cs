@@ -1,4 +1,5 @@
-﻿using Rimshot.Views;
+﻿using GalaSoft.MvvmLight.Threading;
+using Rimshot.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -75,6 +76,7 @@ namespace Rimshot
                 // paramètre
                 rootFrame.Navigate(typeof(Views.EventsPage), e.Arguments);
             }
+
             // Vérifiez que la fenêtre actuelle est active
             Window.Current.Activate();
         }

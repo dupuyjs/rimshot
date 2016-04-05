@@ -126,6 +126,9 @@
   <data name="Home.Content" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="Search.Text" xml:space="preserve">
+    <value>search</value>
+  </data>
   <data name="Settings.Content" xml:space="preserve">
     <value>Settings</value>
   </data>

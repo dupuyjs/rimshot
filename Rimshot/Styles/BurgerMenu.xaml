@@ -17,7 +17,7 @@
 
     <Style TargetType="SplitView">
         <Setter Property="IsPaneOpen" Value="False" />
-        <Setter Property="OpenPaneLength" Value="220" />
+        <Setter Property="OpenPaneLength" Value="240" />
         <Setter Property="CompactPaneLength" Value="48" />
         <Setter Property="DisplayMode" Value="CompactInline" />
         <Setter Property="PaneBackground" Value="{ThemeResource BurgerMenuBackground}" />

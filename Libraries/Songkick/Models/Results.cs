@@ -13,7 +13,7 @@ namespace Songkick.Models
         public List<Location> Locations { get; set; }
 
         [JsonProperty("artist")]
-        public List<Artist> Artists { get; set; }
+        public List<ArtistExt> Artists { get; set; }
 
         [JsonProperty("venue")]
         [JsonConverter(typeof(SingleOrArrayConverter<VenueExt>))]

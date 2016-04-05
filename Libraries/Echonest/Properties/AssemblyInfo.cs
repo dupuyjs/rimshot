@@ -1,10 +1,11 @@
-﻿using System.Reflection;
+﻿using System.Resources;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
+// Les informations générales relatives à un assembly dépendent de 
+// l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
+// associées à un assembly.
 [assembly: AssemblyTitle("Echonest")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
@@ -13,17 +14,17 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+[assembly: NeutralResourcesLanguage("fr")]
 
-// Version information for an assembly consists of the following four values:
+// Les informations de version pour un assembly se composent des quatre valeurs suivantes :
 //
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
+//      Version principale
+//      Version secondaire 
+//      Numéro de build
+//      Révision
 //
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
+// Vous pouvez spécifier toutes les valeurs ou utiliser par défaut les numéros de build et de version 
+// en utilisant '*', comme indiqué ci-dessous :
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: ComVisible(false)]

@@ -52,6 +52,7 @@ namespace Rimshot.Views
             this.ShellSplitView.Content = frame;
             this._contentFrame = frame;
 
+    
             SimpleIoc.Default.Register<IDialogService>(() => this);
 
             //var update = new Action(() => UpdateNavigation());
@@ -145,9 +146,17 @@ namespace Rimshot.Views
             (s as RadioButton).IsChecked = false;
         }
 
-        void IDialogService.ShowError(string errorMessage, string title, string buttonText)
+        void IDialogService.DisplayStatus(string message, string title, string buttonText)
         {
             DispatcherHelper.CheckBeginInvokeOnUI(async() => {
+                var dialog = new MessageDialog(message, title);
+                await dialog.ShowAsync();
+            });
+        }
+
+        void IDialogService.DisplayError(string errorMessage, string title, string buttonText)
+        {
+            DispatcherHelper.CheckBeginInvokeOnUI(async () => {
                 var dialog = new MessageDialog(errorMessage, title);
                 await dialog.ShowAsync();
             });

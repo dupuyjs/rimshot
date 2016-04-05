@@ -18,7 +18,7 @@ namespace Helpers.Converters
                 return string.Format("{0} au {1}", arrayDate[0].ConvertDate(), arrayDate[1].ConvertDate()).ToLower();
             }
 
-            return inputDate.ConvertDate().ToLower();
+            return inputDate.ConvertDate().ToString("D").ToLower();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -33,12 +33,7 @@ namespace Helpers.Converters
         {
             if (!string.IsNullOrEmpty(inputDate))
             {
-                DateTime parsedDate = default(DateTime);
-                string pattern = "yyyy-MM-dd";
-                if (DateTime.TryParseExact(inputDate, pattern, null, DateTimeStyles.None, out parsedDate))
-                {
-                    return parsedDate.ToString("dd");
-                }
+                inputDate.ConvertDate().ToString("dd");
             }
 
             return inputDate;
@@ -69,12 +64,7 @@ namespace Helpers.Converters
         {
             if (!string.IsNullOrEmpty(inputDate))
             {
-                DateTime parsedDate = default(DateTime);
-                string pattern = "yyyy-MM-dd";
-                if (DateTime.TryParseExact(inputDate, pattern, null, DateTimeStyles.None, out parsedDate))
-                {
-                    return parsedDate.ToString("MM");
-                }
+                inputDate.ConvertDate().ToString("MM");
             }
 
             return inputDate;
