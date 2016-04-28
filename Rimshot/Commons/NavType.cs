@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rimshot.Models
+namespace Rimshot.Commons
 {
     public class NavType
     {

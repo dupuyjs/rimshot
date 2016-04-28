@@ -5,7 +5,7 @@
     xmlns:local="using:Rimshot.Views"
     xmlns:songkick="using:Songkick.Models"
     xmlns:behaviors="using:Rimshot.Behaviors"
-    xmlns:models="using:Rimshot.Models"
+    xmlns:commons="using:Rimshot.Commons"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -65,26 +65,18 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    
-                    <Rectangle x:Name="Thumbnail"
-                               Stroke="{ThemeResource ThemeGrayHighColorBrush}" 
-                               StrokeThickness="0">
-                        <!--<Rectangle.Fill>
-                            <ImageBrush ImageSource="{x:Bind ArtistImageUrl, Mode=OneWay}" Stretch="UniformToFill" ImageFailed="OnImageFailed"/>
-                        </Rectangle.Fill>-->
-                    </Rectangle>
-                    <Image Source="{Binding ArtistImageUrl, Mode=OneWay}" Stretch="UniformToFill"/>
 
-                    <Border Grid.RowSpan="2" Background="Black" Opacity="0.4"/>
+                    <Image x:Name="Thumbnail" Source="{Binding ArtistImageUrl, Mode=OneWay}" Stretch="UniformToFill"/>
+                    <Border x:Name="Filter" Grid.RowSpan="2" Background="Black" Opacity="0.4"/>
+
+                    <SymbolIcon Symbol="People" Height="48" Width="48" Foreground="White"/>
 
                     <Grid Grid.Row="1" VerticalAlignment="Center">
                         <Border Background="Black" Opacity="0.6"/>
                         <StackPanel Margin="6">
                             <TextBlock x:Name="DisplayName" Text="{x:Bind DisplayName}" Style="{ThemeResource ThemeCaptionStyle}" Foreground="White"/>
-                            <!--<TextBlock x:Name="DisplayVenue" Text="{x:Bind FullDisplayVenue}" Style="{ThemeResource ThemeListViewSubTitleStyle}"/>-->
                         </StackPanel>
                     </Grid>
-  
                 </Grid>
             </DataTemplate>
 
@@ -95,24 +87,15 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Rectangle x:Name="Thumbnail"
-                               Stroke="{ThemeResource ThemeGrayHighColorBrush}" 
-                               StrokeThickness="0">
-                        <!--<Rectangle.Fill>
-                            <ImageBrush ImageSource="{x:Bind ArtistImageUrl, Mode=OneWay}" Stretch="UniformToFill" ImageFailed="OnImageFailed"/>
-                        </Rectangle.Fill>-->
-                    </Rectangle>
-
-                    <Border Grid.RowSpan="2" Background="{ThemeResource ThemePurpleHighColorBrush}" Opacity="0.4"/>
+                    <Image x:Name="Thumbnail" Source="{Binding ArtistImageUrl, Mode=OneWay}" Stretch="UniformToFill"/>
+                    <Border x:Name="Filter" Grid.RowSpan="2" Background="{ThemeResource ThemePurpleHighColorBrush}" Opacity="0.4"/>
 
                     <Grid Grid.Row="1" VerticalAlignment="Center">
                         <Border Background="Black" Opacity="0.6"/>
                         <StackPanel Margin="6">
                             <TextBlock x:Name="DisplayName" Text="{x:Bind DisplayName}" Style="{ThemeResource ThemeCaptionStyle}" Foreground="White"/>
-                            <!--<TextBlock x:Name="DisplayVenue" Text="{x:Bind FullDisplayVenue}" Style="{ThemeResource ThemeListViewSubTitleStyle}"/>-->
                         </StackPanel>
                     </Grid>
-
                 </Grid>
             </DataTemplate>
 
@@ -137,7 +120,7 @@
                 </Grid>
             </DataTemplate>
 
-            <models:HomeTemplateSelector x:Name="HomeTemplateSelector" 
+            <commons:HomeTemplateSelector x:Name="HomeTemplateSelector" 
                                          OriginalTemplate="{StaticResource ArtistOriginalItemTemplate}"
                                          OnTourTemplate="{StaticResource ArtistOnTourItemTemplate}"/>
         </ResourceDictionary>
@@ -145,7 +128,7 @@
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
-            <!--<VisualStateGroup x:Name="AdaptiveStates" CurrentStateChanged="OnStateChanged">
+            <VisualStateGroup x:Name="AdaptiveStates">
                 <VisualState x:Name="Small">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="0" />
@@ -158,28 +141,8 @@
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="720" />
                     </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        --><!--<Setter Target="ArtistsGridView.(Background)" Value="Green"/>-->
-                        <!--<Setter Target="ArtistsGridView.(behaviors:ColumnsBehavior.FixedColumns)" Value="4"/>--><!--
-                    </VisualState.Setters>
                 </VisualState>
-                <VisualState x:Name="Wide">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1024" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        --><!--<Setter Target="ArtistsGridView.(Background)" Value="Red"/>--><!--
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="SuperWide">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1412" />
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        --><!--<Setter Target="ArtistsGridView.(Background)" Value="Yellow"/>--><!--
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>-->
+            </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
         <Grid.ColumnDefinitions>
@@ -189,7 +152,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -201,11 +164,10 @@
             <Image Source="ms-appx:///Assets/Songkick/ConcertsBy.png" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="12,12,12,4"/>
         </Grid>
 
-
-        
         <ListView x:Name="MasterListEvents"
-                  Grid.Row="2"
+                  Grid.Row="1"
                   Grid.Column="1"
+                  Grid.RowSpan="2"
                   Background="{ThemeResource ThemeGrayLowColorBrush}"
                   ItemTemplate="{StaticResource EventListViewTemplate}"
                   SelectionChanged="OnSelectionChanged"
@@ -222,27 +184,55 @@
             </ListView.ItemContainerStyle>
         </ListView>
 
-        <StackPanel x:Name="SearchLayout"
-              Background="{ThemeResource ThemeGrayLowColorBrush}"
+        <Grid x:Name="SearchLayout"
+              HorizontalAlignment="Stretch"
               Grid.Row="1"
-              Grid.Column="1">
+              Grid.Column="0">
+  
+            <Grid.RowDefinitions>
+                <RowDefinition Height="48"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
             <!--<SymbolIcon Symbol="Find" Foreground="Black" HorizontalAlignment="Left" Margin="12,0"/>-->
-            <AutoSuggestBox x:Name="QueryBox"  
-                            QueryIcon="Find" 
-                            Margin="10,6,10,3" 
-                            Background="White"
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="48"/>
+                </Grid.ColumnDefinitions>
+                <SymbolIcon Symbol="Find" Foreground="{ThemeResource ThemeGrayHighColorBrush}" VerticalAlignment="Center"/>
+                <AutoSuggestBox x:Name="QueryBox"  
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Center"
+                            Grid.Column="1"
+                            QueryIcon="Microphone" 
+                            BorderThickness="1"
                             PlaceholderText="search concert, artist or venue"
                             QuerySubmitted="OnQuerySubmitted"/>
-            <DatePicker Margin="10,3" />
-            <DatePicker Margin="10,3" />
-            <AutoSuggestBox x:Name="LocationBox"  
+                <SymbolIcon Symbol="Add" Grid.Column="2" Foreground="{ThemeResource ThemeGrayHighColorBrush}" VerticalAlignment="Center"/>
+            </Grid>
+
+
+            <!--<Grid Grid.Row="1" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="48"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <DatePicker Grid.Column="1"/>
+                <DatePicker Grid.Column="3"/>
+            </Grid>-->
+            <!--<DatePicker Margin="10,3" />
+            <DatePicker Margin="10,3" />-->
+            <!--<AutoSuggestBox x:Name="LocationBox"  
                             QueryIcon="Map" 
                             Margin="10,3,10,6" 
                             Background="White"
                             PlaceholderText="search location"
-                            QuerySubmitted="OnQuerySubmitted"/>
+                            QuerySubmitted="OnQuerySubmitted"/>-->
 
-        </StackPanel>
+        </Grid>
         
         <Grid x:Name="HeaderSearchLayout" 
               Grid.Row="0"
@@ -253,23 +243,17 @@
             <Image HorizontalAlignment="Right" Margin="12,10" Source="ms-appx:///Assets/Common/RimshotLogo-Full.png"/>
         </Grid>
 
-
-
-        <!--<Border Grid.Row="2" Grid.Column="1" BorderThickness="1" BorderBrush="Black" Width="1200" Height="500" VerticalAlignment="Top">
-            <Image Source="ms-appx:///Assets/Home/Drum.jpg" Stretch="UniformToFill" />
-        </Border>-->
-        <Pivot x:Name="SearchPivot" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0">
-            <PivotItem >
+        <Pivot x:Name="SearchPivot" Grid.Row="2" Grid.RowSpan="2" Grid.Column="0">
+            <PivotItem Padding="0" Margin="6,0,0,0" >
                 <PivotItem.Header>
                     <Grid>
-                        <TextBlock Text="artists"/>
+                        <TextBlock Text="{Binding ArtistsTitle}"/>
                     </Grid>
                 </PivotItem.Header>
                 <GridView x:Name="ArtistsGridView" 
                           ItemsSource="{Binding Artists}" 
-                          
                           ItemTemplateSelector="{StaticResource HomeTemplateSelector}"
-                          behaviors:ColumnsBehavior.FixedColumns="6">
+                          behaviors:ColumnsBehavior.TargetItemWidth="140">
                     <GridView.ItemContainerStyle>
                         <Style TargetType="GridViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -286,11 +270,16 @@
                     </GridView.ItemsPanel>
                 </GridView>
             </PivotItem>
-            <PivotItem x:Uid="Concerts" Header="concerts">
+            <PivotItem x:Uid="Concerts">
+                <PivotItem.Header>
+                    <Grid>
+                        <TextBlock Text="{Binding ConcertsTitle}"/>
+                    </Grid>
+                </PivotItem.Header>
                 <GridView x:Name="ConcertsGridView" 
                           ItemsSource="{Binding Concerts}" 
                           ItemTemplate="{StaticResource ConcertItemTemplate}" 
-                          behaviors:ColumnsBehavior.FixedColumns="3">
+                          behaviors:ColumnsBehavior.TargetItemWidth="220">
                     <GridView.ItemContainerStyle>
                         <Style TargetType="GridViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -298,11 +287,16 @@
                     </GridView.ItemContainerStyle>
                 </GridView>
             </PivotItem>
-            <PivotItem x:Uid="Venues" Header="venues">
+            <PivotItem x:Uid="Venues">
+                <PivotItem.Header>
+                    <Grid>
+                        <TextBlock Text="{Binding VenuesTitle}"/>
+                    </Grid>
+                </PivotItem.Header>
                 <GridView x:Name="VenuesGridView" 
                           ItemsSource="{Binding Venues}" 
                           ItemTemplate="{StaticResource VenueItemTemplate}" 
-                          behaviors:ColumnsBehavior.FixedColumns="3">
+                          behaviors:ColumnsBehavior.TargetItemWidth="150">
                     <GridView.ItemContainerStyle>
                         <Style TargetType="GridViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />

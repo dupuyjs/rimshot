@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Threading;
-using Rimshot.Models;
+using Rimshot.Commons;
 using Rimshot.Services;
 using System;
 using System.Collections.Generic;
@@ -52,7 +52,7 @@ namespace Rimshot.Views
             this.ShellSplitView.Content = frame;
             this._contentFrame = frame;
 
-    
+            DispatcherHelper.Initialize();
             SimpleIoc.Default.Register<IDialogService>(() => this);
 
             //var update = new Action(() => UpdateNavigation());
@@ -126,7 +126,7 @@ namespace Rimshot.Views
 
         private void SetLayoutPreference()
         {
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(468, 320));
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(320, 320));
 
             ApplicationView.GetForCurrentView().TitleBar.BackgroundColor = Colors.Black;
             ApplicationView.GetForCurrentView().TitleBar.ForegroundColor = Colors.White;

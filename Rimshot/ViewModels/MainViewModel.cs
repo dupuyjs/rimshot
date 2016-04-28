@@ -2,22 +2,14 @@
 using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
-using Rimshot.Models;
 using Rimshot.Services;
 using Songkick.Models;
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Controls;
 using System.Diagnostics;
-using Echonest.Models;
-using Windows.Devices.Geolocation;
 using Windows.ApplicationModel.Resources;
 using Helpers.Extensions;
-using Microsoft.Xbox.Music.Platform.Client;
-using Microsoft.Xbox.Music.Platform.Contract.DataModel;
 
 namespace Rimshot.ViewModels
 {
@@ -48,6 +40,24 @@ namespace Rimshot.ViewModels
             }
         }
 
+        private string _concertsTitle = "concerts";
+        public string ConcertsTitle
+        {
+            get
+            {
+                return _concertsTitle;
+            }
+            set
+            {
+                _concertsTitle = value;
+
+                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                {
+                    RaisePropertyChanged(() => ConcertsTitle);
+                });
+            }
+        }
+
         private List<ArtistExt> _artists;
         public List<ArtistExt> Artists
         {
@@ -66,6 +76,24 @@ namespace Rimshot.ViewModels
             }
         }
 
+        private string _artistsTitle = "artists";
+        public string ArtistsTitle
+        {
+            get
+            {
+                return _artistsTitle;
+            }
+            set
+            {
+                _artistsTitle = value;
+
+                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                {
+                    RaisePropertyChanged(() => ArtistsTitle);
+                });
+            }
+        }
+
         private List<VenueExt> _venues;
         public List<VenueExt> Venues
         {
@@ -80,6 +108,24 @@ namespace Rimshot.ViewModels
                 DispatcherHelper.CheckBeginInvokeOnUI(() =>
                 {
                     RaisePropertyChanged(() => Venues);
+                });
+            }
+        }
+
+        private string _venuesTitle = "venues";
+        public string VenuesTitle
+        {
+            get
+            {
+                return _venuesTitle;
+            }
+            set
+            {
+                _venuesTitle = value;
+
+                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                {
+                    RaisePropertyChanged(() => VenuesTitle);
                 });
             }
         }
@@ -104,39 +150,15 @@ namespace Rimshot.ViewModels
 
         #region Initialization
 
-        public async Task Search(string query)
-        {
-            Songkick.Models.ContentResponse response = null;
-
-            response = await _dataService.GetEvents(query);
-            this.Concerts = response.ResultsPage.Results.Events;
-
-            response = await _dataService.GetArtists(query);
-            this.Artists = response.ResultsPage.Results.Artists;
-
-            response = await _dataService.GetVenues(query);
-            this.Venues = response.ResultsPage.Results.Venues;
-
-            Task.Run(() => LoadArtistImages());
-        }
-
         private async Task Initialize()
         {
             try
             {
-                Songkick.Models.ContentResponse response = null;
-
-                response = await _dataService.GetArtists("muse");
-                this.Artists = response.ResultsPage.Results.Artists;
-
-                response = await _dataService.GetEvents(null);
-                this.Concerts = response.ResultsPage.Results.Events;
-
-                //this.Artist = concerts.First().Performances.First().Artist;
-
-                Task.Run(() => LoadArtistImages());
+                await LoadArtists("muse");
+                await LoadConcerts(null);
+                await LoadVenues("olympia");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 var loader = new ResourceLoader("Errors");
                 DialogService.DisplayError(loader.GetString("Network/Caption"), loader.GetString("Network/Message"), "");
@@ -237,31 +259,62 @@ namespace Rimshot.ViewModels
             }
         }
 
-        private async Task LoadArtistImages()
-        {
-            if (this.Concerts.Count != 0)
-            {
-                foreach (var concert in this.Concerts)
-                {
-                    foreach (var performance in concert.Performances)
-                    {
-                        await GetMappingAndImage(performance.Artist);
-                    }
-                }
-            }
+        #endregion
 
-            if (this.Artists.Count != 0)
+        #region Load Information and Details
+
+        public async Task LaunchSearch(string query)
+        {
+            await LoadArtists(query);
+            await LoadConcerts(query);
+            await LoadVenues(query);
+        }
+
+        private async Task LoadVenues(string query)
+        {
+            var response = await _dataService.GetVenues(query);
+            this.Venues = response.ResultsPage.Results.Venues;
+            this.VenuesTitle = $"venues ({response.ResultsPage.TotalEntries})";
+        }
+
+        private async Task LoadArtists(string query)
+        {
+            var response = await _dataService.GetArtists(query);
+            this.Artists = response.ResultsPage.Results.Artists;
+            this.ArtistsTitle = $"artists ({response.ResultsPage.TotalEntries})";
+
+            if (this.Artists != null)
             {
-                foreach (var artist in this.Artists)
+                if (this.Artists.Count > 0)
                 {
-                    await GetMappingAndImage(artist);
+                    foreach (var artist in this.Artists)
+                    {
+                        Task.Run(() => GetMappingAndImage(artist));
+                    }
                 }
             }
         }
 
-        #endregion
+        private async Task LoadConcerts(string query)
+        {
+            var response = await _dataService.GetEvents(query);
+            this.Concerts = response.ResultsPage.Results.Events;
+            this.ConcertsTitle = $"concerts ({response.ResultsPage.TotalEntries})";
 
-        #region Load Details
+            if (this.Concerts != null)
+            {
+                if (this.Concerts.Count > 0)
+                {
+                    foreach (var concert in this.Concerts)
+                    {
+                        foreach (var performance in concert.Performances)
+                        {
+                            Task.Run(() => GetMappingAndImage(performance.Artist));
+                        }
+                    }
+                }
+            }
+        }
 
         public async Task LoadConcertDetails(EventExt concert)
         {

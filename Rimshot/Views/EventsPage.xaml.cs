@@ -31,7 +31,6 @@ namespace Rimshot.Views
     {
         public EventsPage()
         {
-            DispatcherHelper.Initialize();
             this.InitializeComponent();
         }
 

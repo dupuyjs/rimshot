@@ -11,7 +11,7 @@
     <AssemblyName>Rimshot</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.14295.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -99,7 +99,7 @@
   <ItemGroup>
     <Compile Include="Behaviors\ColumnsBehavior.cs" />
     <Compile Include="Design\DesignDataService.cs" />
-    <Compile Include="Models\HomeTemplateSelector.cs" />
+    <Compile Include="Commons\HomeTemplateSelector.cs" />
     <Compile Include="Services\Echonest\ArtistItems.cs" />
     <Compile Include="Services\Echonest\ArtistItemsExtensions.cs" />
     <Compile Include="Services\Echonest\IArtistItems.cs" />
@@ -114,8 +114,8 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Keys.cs" />
-    <Compile Include="Models\NavType.cs" />
+    <Compile Include="Commons\Keys.cs" />
+    <Compile Include="Commons\NavType.cs" />
     <Compile Include="Services\DataService\DataService.cs" />
     <Compile Include="Services\DataService\IDataService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

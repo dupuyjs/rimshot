@@ -4,7 +4,7 @@ using Songkick.Models;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
-using Rimshot.Models;
+using Rimshot.Commons;
 using Echonest.Models;
 using Echonest;
 using System;

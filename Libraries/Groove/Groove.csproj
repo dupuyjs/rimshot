@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{96A872B0-8FCA-4836-B094-DF129D8F7A9D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Groove</RootNamespace>
+    <AssemblyName>Groove</AssemblyName>
+    <DefaultLanguage>fr-FR</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Contract\AuthenticationDataModel\AzureDataMarketAuthenticationResponse.cs" />
+    <Compile Include="Contract\AuthenticationDataModel\IXToken.cs" />
+    <Compile Include="Contract\Constants.cs" />
+    <Compile Include="Contract\DataModel\Album.cs" />
+    <Compile Include="Contract\DataModel\Artist.cs" />
+    <Compile Include="Contract\DataModel\BaseResponse.cs" />
+    <Compile Include="Contract\DataModel\BrowseItemType.cs" />
+    <Compile Include="Contract\DataModel\CollectionEdit\ActionResult.cs" />
+    <Compile Include="Contract\DataModel\CollectionEdit\IPlaylistEditableMetadata.cs" />
+    <Compile Include="Contract\DataModel\CollectionEdit\PlaylistAction.cs" />
+    <Compile Include="Contract\DataModel\CollectionEdit\PlaylistActionResponse.cs" />
+    <Compile Include="Contract\DataModel\CollectionEdit\PlaylistActionResult.cs" />
+    <Compile Include="Contract\DataModel\CollectionEdit\PlaylistActionType.cs" />
+    <Compile Include="Contract\DataModel\CollectionEdit\TrackAction.cs" />
+    <Compile Include="Contract\DataModel\CollectionEdit\TrackActionRequest.cs" />
+    <Compile Include="Contract\DataModel\CollectionEdit\TrackActionResponse.cs" />
+    <Compile Include="Contract\DataModel\CollectionEdit\TrackActionResult.cs" />
+    <Compile Include="Contract\DataModel\CollectionEdit\TrackActionType.cs" />
+    <Compile Include="Contract\DataModel\CollectionState.cs" />
+    <Compile Include="Contract\DataModel\Content.cs" />
+    <Compile Include="Contract\DataModel\ContentItem.cs" />
+    <Compile Include="Contract\DataModel\ContentResponse.cs" />
+    <Compile Include="Contract\DataModel\Error.cs" />
+    <Compile Include="Contract\DataModel\ExtraDetails.cs" />
+    <Compile Include="Contract\DataModel\GenericCollections.cs" />
+    <Compile Include="Contract\DataModel\ItemType.cs" />
+    <Compile Include="Contract\DataModel\OrderBy.cs" />
+    <Compile Include="Contract\DataModel\PaginatedList.cs" />
+    <Compile Include="Contract\DataModel\PlatformId.cs" />
+    <Compile Include="Contract\DataModel\Playlist.cs" />
+    <Compile Include="Contract\DataModel\Rights.cs" />
+    <Compile Include="Contract\DataModel\SearchFilter.cs" />
+    <Compile Include="Contract\DataModel\StreamResponse.cs" />
+    <Compile Include="Contract\DataModel\Track.cs" />
+    <Compile Include="Contract\DataModel\UserProfileResponse.cs" />
+    <Compile Include="Contract\ErrorCode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XboxMusicClient\AzureDataMarketAuthenticationCache.cs" />
+    <Compile Include="XboxMusicClient\AzureDataMarketAuthenticationClient.cs" />
+    <Compile Include="XboxMusicClient\ContentExtensions.cs" />
+    <Compile Include="XboxMusicClient\IXboxMusicClient.cs" />
+    <Compile Include="XboxMusicClient\SimpleServiceClient.cs" />
+    <Compile Include="XboxMusicClient\XboxMusicClient.cs" />
+    <Compile Include="XboxMusicClient\XboxMusicClientExtensions.cs" />
+    <Compile Include="XboxMusicClient\XboxMusicClientFactory.cs" />
+    <EmbeddedResource Include="Properties\Groove.rd.xml" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
